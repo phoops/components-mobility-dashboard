@@ -92,8 +92,61 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  ###
+  # smartcity-dashboard
+  ###
+  ql-service:
+    build:
+      context: .
+      dockerfile: ./backend/qlService/Dockerfile
+    environment:
+      DB_HOST: mongo
+      DB_PORT: "27017"
+      DB_USER: root
+      DB_PASS: supersecret
+      DB_NAME: test
+  frontend-service:
+    build:
+      context: .
+      dockerfile: ./backend/frontendService/Dockerfile
+    environment:
+      DB_HOST: mongo
+      DB_PORT: "27017"
+      DB_USER: root
+      DB_PASS: supersecret
+      DB_NAME: test
+
+  frontend-app:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    ports:
+      - 3000:3000
+
+  ###
+  # smartcity-dashboard dependencies
+  ###
+  mongo:
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_HOST: mongo
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: supersecret
+      MONGO_INITDB_DATABASE: test
+    volumes:
+    - mongodata:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: supersecret
 
 volumes:
   cratedata:
   redisdata:
   pgdata:
+  mongodata:
