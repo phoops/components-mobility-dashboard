@@ -112,9 +112,9 @@ services:
     environment:
       DB_HOST: mongo
       DB_PORT: "27017"
-      DB_USER: root
-      DB_PASS: supersecret
-      DB_NAME: test
+      DB_USER: dashboardUser
+      DB_PASS: dashboardPassword
+      DB_NAME: dashboard
 
   frontend-app:
     build:
@@ -126,24 +126,21 @@ services:
   ###
   # smartcity-dashboard dependencies
   ###
+
   mongo:
     image: mongo:4.4
-    ports:
-      - 27017:27017
     environment:
-      MONGODB_HOST: mongo
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: supersecret
-      MONGO_INITDB_DATABASE: test
-    volumes:
-    - mongodata:/data/db
+      MONGO_INITDB_ROOT_PASSWORD: example
+
   mongo-express:
     image: mongo-express
     ports:
       - 8081:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: supersecret
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
 volumes:
   cratedata:
