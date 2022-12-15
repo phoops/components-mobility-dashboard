@@ -1,0 +1,194 @@
+{
+  "_id": ObjectID(),
+  "index": 1,
+  "name": "Arezzo",
+  "url": "arezzo",
+  "icon": "dashboard",
+  "visible": true,
+  "widgets": [
+    {
+      "name": "Mobility",
+      "panels": [
+        {
+          "name": "Aktuelle Auslastung",
+          "width": 2,
+          "height": 300,
+          "tabs": [
+            {
+              "name": "Tab",
+              "type": "chart",
+              "text": "",
+              "apexType": "donut",
+              "apexOptions": {
+                "yaxis": { "forceNiceScale": true },
+                "dataLabels": { "enabled": false },
+                "chart": {
+                  "toolbar": { "show": false },
+                  "background": "#152437"
+                },
+                "stroke": { "show": true, "colors": ["#152437"] },
+                "theme": { "mode": "dark", "palette": "palette4" },
+                "colors": ["#04beaf", "#0587bb"],
+                "legend": { "position": "top", "markers": { "radius": 5 } },
+                "xaxis": {
+                  "convertedCatToNumeric": false,
+                  "categories": [],
+                  "type": "category",
+                  "labels": { "rotate": 0 },
+                  "tickAmount": 13
+                },
+                "labels": ["frei", "Besucher"]
+              },
+              "apexSeries": [5, 95],
+              "apexMaxValue": 8,
+              "apexMaxAlias": "frei",
+              "apexMaxColor": "#04beaf",
+              "timeframe": 0,
+              "fiwareService": "ssd",
+              "entityId": ["sdsd"],
+              "attribute": { "keys": ["attr1"], "aliases": ["attr1"] },
+              "values": [],
+              "decimals": 0,
+              "aggrMode": "single",
+              "queryData": { "_id": ObjectID("61f1349397fe31a9d33fe4d0") }
+            }
+          ]
+        },
+        {
+          "name": "Auslastung der vergangenen Woche",
+          "width": 4,
+          "height": 300,
+          "tabs": [
+            {
+              "name": "Tab",
+              "type": "chart",
+              "text": "",
+              "apexType": "bar",
+              "apexOptions": {
+                "grid": { "borderColor": "#2f3a4e" },
+                "yaxis": {
+                  "forceNiceScale": true,
+                  "title": { "text": "Anzahl der Besucher" }
+                },
+                "dataLabels": { "enabled": false },
+                "fill": { "opacity": 1 },
+                "chart": {
+                  "toolbar": { "show": false },
+                  "background": "#152437"
+                },
+                "theme": { "mode": "dark", "palette": "palette4" },
+                "colors": ["#0587bb", "#ff9f00"],
+                "legend": { "position": "top", "markers": { "radius": 5 } },
+                "xaxis": {
+                  "convertedCatToNumeric": false,
+                  "type": "category",
+                  "categories": [
+                    "24.01.",
+                    "25.01.",
+                    "26.01.",
+                    "27.01.",
+                    "28.01.",
+                    "29.01.",
+                    "30.01."
+                  ],
+                  "labels": { "rotate": 0 },
+                  "tickAmount": 13
+                }
+              },
+              "apexSeries": [
+                { "name": "Besucher", "data": [51, 62, 63, 74, 65, 86, 97] }
+              ],
+              "apexMaxValue": 100,
+              "apexMaxAlias": "Maximale Besucher",
+              "apexMaxColor": "#04beaf",
+              "timeframe": 0,
+              "fiwareService": "akasjdlsd",
+              "entityId": ["skdjalsdj"],
+              "attribute": { "keys": ["Besucher"], "aliases": ["Besucher"] },
+              "values": [],
+              "decimals": 0,
+              "aggrMode": "single",
+              "queryData": { "_id": ObjectID("61f929546eb2edbb8b0a84fe") }
+            }
+          ]
+        },
+        {
+          "name": "Wasser",
+          "width": 2,
+          "height": 300,
+          "tabs": [
+            {
+              "name": "Tab",
+              "type": "value",
+              "text": "",
+              "apexType": "donut",
+              "apexOptions": {
+                "grid": { "borderColor": "#2f3a4e" },
+                "yaxis": { "forceNiceScale": true },
+                "dataLabels": { "enabled": false },
+                "fill": { "opacity": 1 },
+                "chart": {
+                  "toolbar": { "show": false },
+                  "background": "#152437"
+                },
+                "theme": { "mode": "dark" },
+                "colors": ["#0C2A5F", "#1e2738"]
+              },
+              "apexSeries": [],
+              "apexMaxValue": 100,
+              "apexMaxAlias": "",
+              "apexMaxColor": "#04beaf",
+              "timeframe": 0,
+              "fiwareService": "Durchschnittl",
+              "entityId": ["durchscnitt"],
+              "attribute": {
+                "keys": ["durschnittTemp"],
+                "aliases": ["Aktuelle Wassertemperatur [°C]"]
+              },
+              "values": [28],
+              "decimals": 0,
+              "aggrMode": "single",
+              "queryData": { "_id": ObjectID("61f937636eb2edbb8b0aa539") }
+            }
+          ]
+        },
+        {
+          "name": "Infos",
+          "width": 4,
+          "height": 300,
+          "tabs": [
+            {
+              "name": "Tab",
+              "type": "description",
+              "text": "Dieser Prototyp eines Smart City Dashboards dient zur Visualisierung von Daten aus einer FIWARE basierten Urban Data Platform. Durch die Bereitstellung der Daten, insbesondere in Form von Charts, können Bürger:innen und Interessent:innen ein Überblick über den aktuellen Sachverhalt in der Stadt gegeben werden.",
+              "apexType": "donut",
+              "apexOptions": {
+                "grid": { "borderColor": "#2f3a4e" },
+                "yaxis": { "forceNiceScale": true },
+                "dataLabels": { "enabled": false },
+                "fill": { "opacity": 1 },
+                "chart": {
+                  "toolbar": { "show": false },
+                  "background": "#152437"
+                },
+                "theme": { "mode": "dark" },
+                "colors": ["#0C2A5F"]
+              },
+              "apexSeries": [],
+              "apexMaxValue": 100,
+              "apexMaxAlias": "",
+              "apexMaxColor": "#04beaf",
+              "timeframe": 0,
+              "fiwareService": "",
+              "entityId": [],
+              "attribute": { "keys": [], "aliases": [] },
+              "values": [],
+              "decimals": 0,
+              "aggrMode": "single"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
