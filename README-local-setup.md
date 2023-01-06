@@ -712,6 +712,8 @@ db.querydatas.insertMany([
 
 ```
 
+Add in mongo a User, see configuration/user.json. Password is smartcitypassword.
+
 ## Rebuild services
 
 when code changes run `docker compose build <service>`

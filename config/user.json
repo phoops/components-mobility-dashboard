@@ -1,0 +1,6 @@
+{
+    "_id": ObjectID(),
+    "username": "smartcityuser",
+    "password": "$2a$10$oLEqX7YY9p5Tm9v50CaflOA46h3vfnQxg74APYvkpkrD5odnrwfmG",
+    "roles": []
+}
