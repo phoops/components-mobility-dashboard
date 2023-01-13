@@ -712,7 +712,7 @@ db.querydatas.insertMany([
 
 ```
 
-Add in mongo a User, see configuration/user.json. Password is smartcitypassword.
+Add in mongo a final user for the dashboard in the User collection, see configuration/user.json. Password is smartcitypassword.
 
 ## Rebuild services
 
