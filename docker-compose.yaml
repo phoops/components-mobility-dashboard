@@ -30,12 +30,14 @@ services:
   # ###
   # # QuantumLeap deps
   # ###
-  # # Need to run this in order to start crate in docker
-  # # sysctl -w vm.max_map_count=262144
   crate:
     image: crate:${CRATE_VERSION:-4.6.7}
-    command: crate -Cauth.host_based.enabled=false
-      -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    command: crate
+      -Cauth.host_based.enabled=false
+      -Ccluster.name=democluster
+      -Chttp.cors.enabled=true
+      -Chttp.cors.allow-origin="*"
+      -Cdiscovery.type=single-node
     environment:
       - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
     ports:
