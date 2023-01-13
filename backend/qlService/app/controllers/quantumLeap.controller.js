@@ -19,7 +19,7 @@ function getCurrentDataFromContextBroker(queryConfig, callback, errCallback) {
       headers: {
         "Fiware-Service": queryConfig.fiwareService,
         "Fiware-ServicePath": "/",
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
       },
     })
     .then(function (response) {
@@ -45,7 +45,7 @@ function getMultiCurrentDataFromContextBroker(
       headers: {
         "Fiware-Service": queryConfig.fiwareService,
         "Fiware-ServicePath": "/",
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
       },
     })
 
@@ -73,7 +73,7 @@ function getHistoricalDataFromQuantumLeap(queryConfig, callback, errCallback) {
         "Content-Type": "application/json",
         "Fiware-Service": queryConfig.fiwareService,
         "Fiware-ServicePath": "/",
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
       },
     })
     .then(function (response) {

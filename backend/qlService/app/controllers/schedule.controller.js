@@ -27,7 +27,7 @@ function updateTokenIfNecessary() {
 // runs every 15 seconds
 function runSchedule() {
   cron.schedule("*/15 * * * * *", () => {
-    updateTokenIfNecessary();
+    // updateTokenIfNecessary();
 
     getQuerydata((querydata) => {
       const now = new Date();
