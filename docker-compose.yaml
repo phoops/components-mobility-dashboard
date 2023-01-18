@@ -124,13 +124,13 @@ services:
   # smartcity-dashboard is not compatible with scorpio, yet
   orion:
     image: fiware/orion
-    links:
-      - mongo
     ports:
       - "1026:1026"
-    command: -dbhost mongo
+    command: -dbhost mongo4orion
     healthcheck:
       test: curl --output /dev/null --silent --fail http://localhost:1026/v2
+  mongo4orion:
+    image: mongo:4.4
 
 volumes:
   cratedata:
