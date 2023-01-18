@@ -26,7 +26,7 @@ tasks:
           DOCKER_FILE_PATH: ./frontend/Dockerfile
 
   push-docker-app:
-    desc: "Push snitch prod container to nexus"
+    desc: "Push app container to nexus"
     deps:
       - task: template/docker-push
         vars:
@@ -41,7 +41,7 @@ tasks:
           DOCKER_FILE_PATH: ./backend/frontendService/Dockerfile
 
   push-docker-frontend-service:
-    desc: "Push snitch prod container to nexus"
+    desc: "Push frontend-service container to nexus"
     deps:
       - task: template/docker-push
         vars:
@@ -56,7 +56,7 @@ tasks:
           DOCKER_FILE_PATH: ./backend/qlService/Dockerfile
 
   push-docker-ql-service:
-    desc: "Push snitch prod container to nexus"
+    desc: "Push ql-serviced container to nexus"
     deps:
       - task: template/docker-push
         vars:
