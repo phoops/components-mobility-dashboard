@@ -1,0 +1,80 @@
+---
+version: '3'
+
+dotenv: ['.env']
+tasks:
+  build-docker-images:
+    desc: "Build all images"
+    deps:
+      - task: build-docker-app
+      - task: build-docker-frontend-service
+      - task: build-docker-ql-service
+
+  push-docker-images:
+    desc: "Push all images to nexus"
+    deps:
+      - task: push-docker-app
+      - task: push-docker-frontend-service
+      - task: push-docker-ql-service
+
+  build-docker-app:
+    desc: "Build app"
+    deps:
+      - task: template/docker-build
+        vars:
+          IMAGE_NAME: smartcity-dashboard-app
+          DOCKER_FILE_PATH: ./frontend/Dockerfile
+
+  push-docker-app:
+    desc: "Push snitch prod container to nexus"
+    deps:
+      - task: template/docker-push
+        vars:
+          IMAGE_NAME: smartcity-dashboard-app
+
+  build-docker-frontend-service:
+    desc: "Build frontend-service"
+    deps:
+      - task: template/docker-build
+        vars:
+          IMAGE_NAME: smartcity-dashboard-frontend-service
+          DOCKER_FILE_PATH: ./backend/frontendService/Dockerfile
+
+  push-docker-frontend-service:
+    desc: "Push snitch prod container to nexus"
+    deps:
+      - task: template/docker-push
+        vars:
+          IMAGE_NAME: smartcity-dashboard-frontend-service
+
+  build-docker-ql-service:
+    desc: "Build ql-service"
+    deps:
+      - task: template/docker-build
+        vars:
+          IMAGE_NAME: smartcity-dashboard-ql-service
+          DOCKER_FILE_PATH: ./backend/qlService/Dockerfile
+
+  push-docker-ql-service:
+    desc: "Push snitch prod container to nexus"
+    deps:
+      - task: template/docker-push
+        vars:
+          IMAGE_NAME: smartcity-dashboard-ql-service
+
+  # templates
+  template/docker-build:
+    vars:
+      IMAGE_REPO_BASE: "nexus.phoops.it/phoops"
+      LOCAL_IMAGE: "{{.IMAGE_NAME}}"
+      REMOTE_IMAGE: "{{.IMAGE_REPO_BASE}}/{{.LOCAL_IMAGE}}"
+    cmds:
+      - docker build -f '{{.DOCKER_FILE_PATH}}' -t '{{.LOCAL_IMAGE}}':${SMARTCITY_DASHBOARD_TAG} -t '{{.REMOTE_IMAGE}}':${SMARTCITY_DASHBOARD_TAG} .
+
+  template/docker-push:
+    vars:
+      IMAGE_REPO_BASE: "nexus.phoops.it/phoops"
+      LOCAL_IMAGE: "{{.IMAGE_NAME}}"
+      REMOTE_IMAGE: "{{.IMAGE_REPO_BASE}}/{{.LOCAL_IMAGE}}"
+    cmds:
+      - docker push '{{.REMOTE_IMAGE}}':${SMARTCITY_DASHBOARD_TAG}
