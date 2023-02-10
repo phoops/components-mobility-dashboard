@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-set -e 
-rm -Rf ngsild-ds.zip ngsild-grafana-datasource ngsild-grafana-datasource-1.0.0.tgz
-wget https://github.com/bfi-de/ngsild-grafana-datasource/releases/download/v1.0.0/ngsild-grafana-datasource-1.0.0.tgz
-tar xvf ngsild-grafana-datasource-1.0.0.tgz

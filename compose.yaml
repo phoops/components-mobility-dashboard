@@ -39,9 +39,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      ## Anonymous admin
-      # GF_AUTH_ANONYMOUS_ENABLED: true
-      # GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      ## authentication
       GF_SECURITY_ADMIN_PASSWORD: odala2
       ## Install data source plugin
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: ngsild-grafana-datasource
@@ -50,13 +48,27 @@ services:
       BROKER_URL: ${BROKER_URL:-http://scorpio:9090}
       # CONTEXT_URL: ${CONTEXT_URL:-http://host.docker.internal:3004/ngsi-context.jsonld}
       TIMESERIES_URL: ${TIMESERIES_URL:-http://scorpio:9090}
+      GF_INSTALL_PLUGINS: https://github.com/zarelit/ngsild-grafana-datasource/releases/download/scorpio-support-rc1/ngsild-grafana-datasource.zip;ngsild-grafana-datasource
     volumes:
       # Persistent settings
       - grafana-data:/var/lib/grafana
-      # Make datasource plugin available
-      - ./ngsild-grafana-datasource/:/var/lib/grafana/plugins/ngsild-grafana-datasource:ro
-      # Create the default datasource to scorpio
-      # - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      # Make datasource plugin available (helpful in development of the datasource)
+      # - ./ngsild-grafana-datasource/:/var/lib/grafana/plugins/ngsild-grafana-datasource:ro
+      # Provision the datasource declaratively
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+  ###
+  # Data ingest
+  ###
+  otp-stops-extractor:
+    image: nexus.phoops.it/phoops/otp-stops-extractor:v0.1.0
+    environment:
+      BROKER_URL: http://scorpio:9090
+      OTP_URL: https://www.muoversintoscana.it/gw/otp/routers/toscana/index/graphql
+      BOUNDING_BOX_MIN_LON: "11.801471"
+      BOUNDING_BOX_MAX_LON: "11.922997"
+      BOUNDING_BOX_MIN_LAT: "43.350637"
+      BOUNDING_BOX_MAX_LAT: "43.503272"
+
 volumes:
   pgdata:
   redpanda_data:
