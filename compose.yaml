@@ -6,7 +6,7 @@ services:
   # Scorpio Context Broker and deps
   ###
   scorpio:
-    image: scorpiobroker/scorpio:scorpio-aaio-no-eureka_latest
+    image: scorpiobroker/all-in-one-runner:java-kafka-3.0.9
     ports:
       - "9090:9090"
     depends_on:
@@ -38,7 +38,6 @@ services:
     image: grafana/grafana-oss
     ports:
       - "3000:3000"
-    profiles: ["manual"]
     environment:
       ## Anonymous admin
       # GF_AUTH_ANONYMOUS_ENABLED: true
