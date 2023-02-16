@@ -7,6 +7,10 @@ services:
   ###
   scorpio:
     image: scorpiobroker/all-in-one-runner:java-kafka-3.0.9
+    command:
+      - /bin/sh
+      - -c
+      - java -Dquarkus.http.cors=true -Dquarkus.http.cors.origins=* -Dquarkus.http.cors.origins=* -jar quarkus-run.jar
     ports:
       - "9090:9090"
     depends_on:
