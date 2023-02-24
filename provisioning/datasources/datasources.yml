@@ -10,7 +10,7 @@ datasources:
     type: ngsild-grafana-datasource
     typeLogoUrl: public/plugins/ngsild-grafana-datasource/img/logo.svg
     # proxy or direct
-    access: direct
+    access: proxy
     url: $BROKER_URL
     # <string> database user, if used
     user:
