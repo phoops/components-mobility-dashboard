@@ -5,55 +5,55 @@ services:
   ###
   # Scorpio Context Broker and deps
   ###
-  scorpio:
-    image: scorpiobroker/all-in-one-runner:java-kafka-3.0.9
-    command:
-      - /bin/sh
-      - -c
-      - java -Dquarkus.http.cors=true -Dquarkus.http.cors.origins=* -Dquarkus.http.cors.origins=* -jar quarkus-run.jar
-    ports:
-      - "9090:9090"
-    depends_on:
-      - postgres
-      - kafka
+  # scorpio:
+  #   image: scorpiobroker/all-in-one-runner:java-kafka-3.0.9
+  #   command:
+  #     - /bin/sh
+  #     - -c
+  #     - java -Dquarkus.http.cors=true -Dquarkus.http.cors.origins=* -Dquarkus.http.cors.origins=* -jar quarkus-run.jar
+  #   ports:
+  #     - "9090:9090"
+  #   depends_on:
+  #     - postgres
+  #     - kafka
 
-  zookeeper:
-    image: wurstmeister/zookeeper
-    ports:
-      - "2181:2181"
+  # zookeeper:
+  #   image: wurstmeister/zookeeper
+  #   ports:
+  #     - "2181:2181"
 
-  kafka:
-    depends_on:
-      - zookeeper
-    image: wurstmeister/kafka:2.13-2.7.0
-    ports:
-      - "9099:9099"
-    environment:
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9092,OUTSIDE://0.0.0.0:9099
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://localhost:9099
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_MESSAGE_MAX_BYTES: 20000000
-      KAFKA_LOG_RETENTION_MS: -1
+  # kafka:
+  #   depends_on:
+  #     - zookeeper
+  #   image: wurstmeister/kafka:2.13-2.7.0
+  #   ports:
+  #     - "9099:9099"
+  #   environment:
+  #     KAFKA_LISTENERS: INSIDE://0.0.0.0:9092,OUTSIDE://0.0.0.0:9099
+  #     KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://localhost:9099
+  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #     KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+  #     KAFKA_MESSAGE_MAX_BYTES: 20000000
+  #     KAFKA_LOG_RETENTION_MS: -1
 
-  postgres:
-    image: postgis/postgis
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: ngb
-      POSTGRES_PASSWORD: ngb
-      POSTGRES_DB: ngb
-    logging:
-      driver: none
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+  # postgres:
+  #   image: postgis/postgis
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_USER: ngb
+  #     POSTGRES_PASSWORD: ngb
+  #     POSTGRES_DB: ngb
+  #   logging:
+  #     driver: none
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
 
   ###
   # Mobility dashboard
   ###
-  mobility-dashboard:
+  grafana:
     image: grafana/grafana-oss
     ports:
       - "3000:3000"
@@ -64,17 +64,18 @@ services:
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: ngsild-grafana-datasource
       GF_PATHS_PLUGINS: /var/lib/grafana/plugins
       ## Configure datasource
-      BROKER_URL: http://scorpio:9090
+      BROKER_URL: http://localhost:9090
       # CONTEXT_URL: ${CONTEXT_URL:-http://host.docker.internal:3004/ngsi-context.jsonld}
-      TIMESERIES_URL: http://scorpio:9090/ngsi-ld/v1/
-      GF_INSTALL_PLUGINS: https://github.com/zarelit/ngsild-grafana-datasource/releases/download/scorpio-support-rc1/ngsild-grafana-datasource.zip;ngsild-grafana-datasource
+      TIMESERIES_URL: http://localhost:9090/ngsi-ld/v1/
+      # GF_INSTALL_PLUGINS: https://github.com/zarelit/ngsild-grafana-datasource/releases/download/scorpio-support-rc2/ngsild-grafana-datasource.zip;ngsild-grafana-datasource
     volumes:
       # Persistent settings
-      - grafana-data:/var/lib/grafana
+      - grafana-datawhat:/var/lib/grafana
       # Make datasource plugin available (helpful in development of the datasource)
-      # - ./ngsild-grafana-datasource/:/var/lib/grafana/plugins/ngsild-grafana-datasource:ro
+      - ./ngsild-grafana-datasource/:/var/lib/grafana/plugins/ngsild-grafana-datasource:ro
       # Provision the datasource declaratively
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
   ###
   # Data ingest
   ###
