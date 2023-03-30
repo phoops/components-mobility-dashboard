@@ -70,9 +70,9 @@ services:
       # GF_INSTALL_PLUGINS: https://github.com/zarelit/ngsild-grafana-datasource/releases/download/scorpio-support-rc2/ngsild-grafana-datasource.zip;ngsild-grafana-datasource
     volumes:
       # Persistent settings
-      - grafana-datawhat:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
       # Make datasource plugin available (helpful in development of the datasource)
-      - ./ngsild-grafana-datasource/:/var/lib/grafana/plugins/ngsild-grafana-datasource:ro
+      - ./ngsild-grafana-datasource:/var/lib/grafana/plugins/ngsild-grafana-datasource:ro
       # Provision the datasource declaratively
       - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
