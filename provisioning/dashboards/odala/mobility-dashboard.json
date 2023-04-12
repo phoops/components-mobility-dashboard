@@ -106,16 +106,18 @@
       },
       "targets": [
         {
-          "attributes": [],
+          "attributes": [
+            "availableSpotNumber"
+          ],
           "datasource": {
             "type": "ngsild-grafana-datasource",
             "uid": "ngsild_1"
           },
+          "entityName": "name",
           "entityType": "OnStreetParking",
-          "namePattern": "entity_name",
+          "hide": false,
           "queryType": "temporal",
-          "refId": "A",
-          "useLongEntityName": true
+          "refId": "A"
         },
         {
           "attributes": [
@@ -125,8 +127,10 @@
             "type": "ngsild-grafana-datasource",
             "uid": "ngsild_1"
           },
+          "entityName": "name",
           "entityType": "OffStreetParking",
           "hide": false,
+          "namePattern": "entity_plus_attribute",
           "queryType": "temporal",
           "refId": "B"
         }
@@ -388,7 +392,7 @@
           "zoom": 15
         }
       },
-      "pluginVersion": "9.4.7",
+      "pluginVersion": "9.3.6",
       "targets": [
         {
           "attributes": [
@@ -456,22 +460,22 @@
       "type": "geomap"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "revision": 1,
-  "schemaVersion": 38,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Mobility dashboard",
   "uid": "ZuJKr_-Vz",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
