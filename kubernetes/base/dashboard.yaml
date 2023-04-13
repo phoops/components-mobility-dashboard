@@ -1,0 +1,479 @@
+---
+apiVersion: v1
+data:
+  mobility-dashboard.json: |
+    {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 2,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": null,
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 11,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "attributes": [
+              "availableSpotNumber"
+            ],
+            "datasource": {
+              "type": "ngsild-grafana-datasource",
+              "uid": "ngsild_1"
+            },
+            "entityName": "name",
+            "entityType": "OnStreetParking",
+            "hide": false,
+            "queryType": "temporal",
+            "refId": "A"
+          },
+          {
+            "attributes": [
+              "availableSpotNumber"
+            ],
+            "datasource": {
+              "type": "ngsild-grafana-datasource",
+              "uid": "ngsild_1"
+            },
+            "entityName": "name",
+            "entityType": "OffStreetParking",
+            "hide": false,
+            "namePattern": "entity_plus_attribute",
+            "queryType": "temporal",
+            "refId": "B"
+          }
+        ],
+        "title": "Free parking spots",
+        "type": "timeseries"
+      },
+      {
+        "datasource": null,
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "fixed"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 22,
+          "w": 24,
+          "x": 0,
+          "y": 11
+        },
+        "id": 4,
+        "options": {
+          "basemap": {
+            "config": {
+              "showLabels": true,
+              "theme": "light"
+            },
+            "name": "Layer 0",
+            "opacity": 1,
+            "tooltip": false,
+            "type": "carto"
+          },
+          "controls": {
+            "mouseWheelZoom": true,
+            "showAttribution": true,
+            "showDebug": false,
+            "showMeasure": false,
+            "showScale": true,
+            "showZoom": true
+          },
+          "layers": [
+            {
+              "config": {
+                "showLegend": true,
+                "style": {
+                  "color": {
+                    "fixed": "dark-green"
+                  },
+                  "opacity": 1,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 5,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/triangle.svg",
+                    "mode": "fixed"
+                  },
+                  "text": {
+                    "field": "addressDescription",
+                    "fixed": "",
+                    "mode": "fixed"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "top"
+                  }
+                }
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "Restricted Traffic Area - Gates",
+              "tooltip": true,
+              "type": "markers"
+            },
+            {
+              "config": {
+                "showLegend": true,
+                "style": {
+                  "color": {
+                    "fixed": "semi-dark-yellow"
+                  },
+                  "opacity": 1,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 5,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/circle.svg",
+                    "mode": "fixed"
+                  },
+                  "text": {
+                    "field": "name 2",
+                    "fixed": "",
+                    "mode": "field"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "top"
+                  }
+                }
+              },
+              "filterData": {
+                "id": "byRefId",
+                "options": "Bus Stops"
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "Bus Stops",
+              "tooltip": true,
+              "type": "markers"
+            },
+            {
+              "config": {
+                "showLegend": true,
+                "style": {
+                  "color": {
+                    "fixed": "dark-purple"
+                  },
+                  "opacity": 1,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 5,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/circle.svg",
+                    "mode": "fixed"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "middle"
+                  }
+                }
+              },
+              "filterData": {
+                "id": "byRefId",
+                "options": "OnStreetParking"
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "OnStreet parkings",
+              "tooltip": true,
+              "type": "markers"
+            },
+            {
+              "config": {
+                "showLegend": true,
+                "style": {
+                  "color": {
+                    "fixed": "dark-blue"
+                  },
+                  "opacity": 0.9,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 5,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/circle.svg",
+                    "mode": "fixed"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "middle"
+                  }
+                }
+              },
+              "filterData": {
+                "id": "byRefId",
+                "options": "OffStreetParkings"
+              },
+              "location": {
+                "mode": "auto"
+              },
+              "name": "OffStreet parkings",
+              "tooltip": true,
+              "type": "markers"
+            }
+          ],
+          "tooltip": {
+            "mode": "details"
+          },
+          "view": {
+            "allLayers": false,
+            "id": "fit",
+            "lastOnly": false,
+            "lat": 0,
+            "layer": "OnStreet parkings",
+            "lon": 0,
+            "zoom": 15
+          }
+        },
+        "pluginVersion": "9.3.6",
+        "targets": [
+          {
+            "attributes": [
+              "location",
+              "addressDescription"
+            ],
+            "datasource": {
+              "type": "ngsild-grafana-datasource",
+              "uid": "ngsild_1"
+            },
+            "entityName": "id",
+            "entityType": "RestrictedTrafficArea",
+            "hide": false,
+            "queryType": "geo",
+            "refId": "ZTL"
+          },
+          {
+            "attributes": [
+              "location",
+              "name"
+            ],
+            "datasource": {
+              "type": "ngsild-grafana-datasource",
+              "uid": "ngsild_1"
+            },
+            "entityType": "GtfsStop",
+            "hide": false,
+            "queryType": "geo",
+            "refId": "Bus Stops"
+          },
+          {
+            "attributes": [
+              "location",
+              "description"
+            ],
+            "coordinates": "",
+            "datasource": {
+              "type": "ngsild-grafana-datasource",
+              "uid": "ngsild_1"
+            },
+            "entityType": "OnStreetParking",
+            "geometry": "Polygon",
+            "geoproperty": "location",
+            "georel": "",
+            "hide": false,
+            "queryType": "geo",
+            "refId": "OnStreetParking"
+          },
+          {
+            "attributes": [
+              "location",
+              "description"
+            ],
+            "datasource": {
+              "type": "ngsild-grafana-datasource",
+              "uid": "ngsild_1"
+            },
+            "entityType": "OffStreetParking",
+            "hide": false,
+            "queryType": "geo",
+            "refId": "OffStreetParkings"
+          }
+        ],
+        "title": "Mobility POIs",
+        "type": "geomap"
+      }
+    ],
+    "refresh": false,
+    "revision": 1,
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Mobility dashboard",
+    "uid": "ZuJKr_-Vz",
+    "version": 5,
+    "weekStart": "" }
+
+kind: ConfigMap
+metadata:
+  name: grafana-mobility-dashboard

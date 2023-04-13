@@ -10,6 +10,11 @@ Grafana is running at <http://localhost:3000>
 
 Grafana default user/pass is admin/odala2, it can be changed in the settings
 
+## Deployment on kubernetes
+
+Under `kubernetes/` there is a kustomization bundle.
+Change the values through the overlay, then `kubectl apply -k kubernetes/overlay`
+
 ## About the datasource
 
 The grafana datasource used to make NGSI-LD native queries is

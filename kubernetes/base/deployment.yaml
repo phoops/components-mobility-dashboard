@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  labels:
+    app.kubernetes.io/name: dashboard
+    app.kubernetes.io/part-of: dashboard
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: dashboard
+      app.kubernetes.io/part-of: dashboard
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: dashboard
+        app.kubernetes.io/part-of: dashboard
+    spec:
+      containers:
+        - image: grafana
+          name: grafana
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: GF_INSTALL_PLUGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: dashboard-config
+                  key: GF_INSTALL_PLUGINS
+            - name: GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: dashboard-config
+                  key: GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS
+            - name: BROKER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: dashboard-config
+                  key: BROKER_URL
+            - name: TIMESERIES_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: dashboard-config
+                  key: TIMESERIES_URL
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dashboard-secret
+                  key: GF_SECURITY_ADMIN_PASSWORD
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: grafana-datasource-provisioning
+            - mountPath: /etc/grafana/provisioning/dashboards
+              name: grafana-mobility-dashboard-provisioner
+            - mountPath: "/etc/grafana/provisioning/dashboards/odala"
+              name: grafana-mobility-dashboard
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: grafana-datasource-provisioning
+          name: grafana-datasource-provisioning
+        - configMap:
+            name: grafana-mobility-dashboard
+          name: grafana-mobility-dashboard
+        - configMap:
+            name: grafana-mobility-dashboard-provisioner
+          name: grafana-mobility-dashboard-provisioner
