@@ -15,6 +15,16 @@ Grafana default user/pass is admin/odala2, it can be changed in the settings
 Under `kubernetes/` there is a kustomization bundle.
 Change the values through the overlay, then `kubectl apply -k kubernetes/overlay`
 
+The dashboard will query Scorpio for entities of type OnStreetParking, OffStreetParking, RestrictedTrafficArea
+and GtfsStop. Info about the datamodels can be found here: <https://github.com/smart-data-models>
+
+In the case of the city of Arezzo the data comes from the following extractors:
+
+- https://gitlab.publiccode.solutions/odala/otp-stops-extractor
+- https://gitlab.publiccode.solutions/odala/emixer-fetcher
+
+Refer to those repositories if data can be ingested from the same providers.
+
 ## About the datasource
 
 The grafana datasource used to make NGSI-LD native queries is
